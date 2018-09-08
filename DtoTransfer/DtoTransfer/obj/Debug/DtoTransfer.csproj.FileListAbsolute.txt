@@ -1,0 +1,13 @@
+G:\Net\DtoTransfer\DtoTransfer\bin\Debug\DtoTransfer.exe.config
+G:\Net\DtoTransfer\DtoTransfer\bin\Debug\DtoTransfer.exe
+G:\Net\DtoTransfer\DtoTransfer\bin\Debug\DtoTransfer.pdb
+G:\Net\DtoTransfer\DtoTransfer\obj\Debug\DtoTransfer.csprojAssemblyReference.cache
+G:\Net\DtoTransfer\DtoTransfer\obj\Debug\DtoTransfer.csproj.CoreCompileInputs.cache
+G:\Net\DtoTransfer\DtoTransfer\obj\Debug\DtoTransfer.exe
+G:\Net\DtoTransfer\DtoTransfer\obj\Debug\DtoTransfer.pdb
+G:\Net\DtoTransfer\DtoTransfer\bin\Debug\AutoMapper.dll
+G:\Net\DtoTransfer\DtoTransfer\bin\Debug\System.ValueTuple.dll
+G:\Net\DtoTransfer\DtoTransfer\bin\Debug\AutoMapper.pdb
+G:\Net\DtoTransfer\DtoTransfer\bin\Debug\AutoMapper.xml
+G:\Net\DtoTransfer\DtoTransfer\bin\Debug\System.ValueTuple.xml
+G:\Net\DtoTransfer\DtoTransfer\obj\Debug\DtoTransfer.csproj.CopyComplete
