@@ -37,7 +37,7 @@ namespace DtoTransfer
                 Money = 12
             };
 
-            var time = 10000000;
+            var time = 1000000;
             var start = DateTime.Now;
             for (int i = 0; i < time; i++)
             {
@@ -54,21 +54,9 @@ namespace DtoTransfer
             Console.WriteLine("AutoMapper:" + (DateTime.Now - startB).Milliseconds);
 
 
-            //start = DateTime.Now;
-            //for (int i = 0; i < time; i++)
-            //{
-            //    var tem = CloneHelper<StuA, Stu>.UpdateDto(strA, st);
-            //}
+    
 
-            //Console.WriteLine("基于反射" + (DateTime.Now - start).Milliseconds);
-
-            var startA = DateTime.Now;
-            for (int i = 0; i < time; i++)
-            {
-                var tem = AutoMapperHelper.UpdateTo(strA, st);
-            }
-
-            Console.WriteLine("AutoMapper Helper" + (DateTime.Now - startA).Milliseconds);
+    
 
 
 
