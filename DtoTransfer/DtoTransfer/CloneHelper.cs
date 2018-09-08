@@ -53,8 +53,8 @@ namespace DtoTransfer
 
         private static Func<TIn, TOut, TOut> UpdateFunc()
         {
-            ParameterExpression parameterExpression = Expression.Parameter(typeof(TIn), "p");
-            ParameterExpression outerExpression = Expression.Parameter(typeof(TOut), "out");
+            ParameterExpression parameterExpression = Expression.Parameter(typeof(TIn));
+            ParameterExpression outerExpression = Expression.Parameter(typeof(TOut));
             List<MemberBinding> memberBindingList = new List<MemberBinding>();
 
             Parallel.ForEach(typeof(TOut).GetProperties(), item => {
