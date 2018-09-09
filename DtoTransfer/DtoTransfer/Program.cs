@@ -20,7 +20,10 @@ namespace DtoTransfer
 
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<StuA, Stu>();
+                cfg.CreateMap<StuA, Stu>().ForMember(des => des.Age, map =>
+                  {
+
+                  });
 
             });
             var st = new Stu()
@@ -29,19 +32,21 @@ namespace DtoTransfer
                 Name = "aasdf",
                 Age = 4,
                 Money = 100
+               ,AString =""
             };
             var strA = new StuA()
             {
                 Age = 555555,
                 Name = "DDDDDDDDDDDDDD",
-                Money = 12
+                Money = 12,
+                BString = null
             };
 
             var time = 1000000;
             var start = DateTime.Now;
             for (int i = 0; i < time; i++)
             {
-                var tem = CloneHelper<StuA, Stu>.Update(strA, st);
+                var tem = CloneHelper<StuA, Stu>.Update(strA, st).ForMember(d => d.AString,strA, s => s.BString);
             }
             Console.WriteLine("表达式树:" + (DateTime.Now - start).Milliseconds);
 
@@ -54,9 +59,9 @@ namespace DtoTransfer
             Console.WriteLine("AutoMapper:" + (DateTime.Now - startB).Milliseconds);
 
 
-    
 
-    
+
+
 
 
 
@@ -70,7 +75,7 @@ namespace DtoTransfer
         public string Name { get; set; }
         public int Age { get; set; }
         public double Money { get; set; }
-
+        public string AString { get; set; }
     }
 
     public class StuA
@@ -78,6 +83,6 @@ namespace DtoTransfer
         public string Name { get; set; }
         public int Age { get; set; }
         public double Money { get; set; }
-
+        public string BString { get; set; }
     }
 }

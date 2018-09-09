@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -57,8 +58,9 @@ namespace DtoTransfer
             ParameterExpression outerExpression = Expression.Parameter(typeof(TOut));
             List<MemberBinding> memberBindingList = new List<MemberBinding>();
 
-            Parallel.ForEach(typeof(TOut).GetProperties(), item => {
-                if ( item.CanWrite)
+            Parallel.ForEach(typeof(TOut).GetProperties(), item =>
+            {
+                if (item.CanWrite)
                 {
                     if (typeof(TIn).GetProperty(item.Name) == null)
                     {
@@ -73,10 +75,10 @@ namespace DtoTransfer
                         memberBindingList.Add(memberBinding);
                     }
                 }
-                
-           
+
+
             });
-         
+
 
             MemberInitExpression memberInitExpression = Expression.MemberInit(Expression.New(typeof(TOut)), memberBindingList.ToArray());
             Expression<Func<TIn, TOut, TOut>> lambda = Expression.Lambda<Func<TIn, TOut, TOut>>(memberInitExpression, new ParameterExpression[] { parameterExpression, outerExpression });
@@ -175,25 +177,54 @@ namespace DtoTransfer
         #endregion
 
     }
+
+
+    public static class CloneHelperExtension
+    {
+        public static TDes ForMember<TSour, TDes, TMember>(this TDes des, Expression<Func<TDes, TMember>> deskey, TSour sour, Expression<Func<TSour, TMember>> sourcekey
+         )
+        { 
+            var me = sourcekey.Compile();
+            var demo = me(sour); 
+            var p = GetPropertyInfo(deskey); 
+            p.SetValue(des,demo); 
+            return des;
+        }
+
+        public static PropertyInfo GetPropertyInfo<T, TR>(Expression<Func<T, TR>> select)
+        {
+            var body = select.Body;
+            if (body.NodeType == ExpressionType.Convert)
+            {
+                var o = (body as UnaryExpression).Operand;
+                return (o as MemberExpression).Member as PropertyInfo;
+            }
+            else if (body.NodeType == ExpressionType.MemberAccess)
+            {
+                return (body as MemberExpression).Member as PropertyInfo;
+            }
+            return null;
+        } 
+    }
+
+
+
+
+
     /// <summary>
     /// AutoMapper扩展帮助类
     /// </summary>
-    public static class AutoMapperHelper 
+    public static class AutoMapperHelper
     {
-          
-       
-
-
-
 
         private static Dictionary<Type, Type> typesDic = new Dictionary<Type, Type>();
         /// <summary>
         ///  类型映射
         /// </summary>
-        public static TDes UpdateTo<T,TDes> (T obj, TDes des)
+        public static TDes UpdateTo<T, TDes>(T obj, TDes des)
         {
-            if (obj == null) return des; 
-            return Mapper.Map<T,TDes>(obj,des);
+            if (obj == null) return des;
+            return Mapper.Map<T, TDes>(obj, des);
         }
 
     }
