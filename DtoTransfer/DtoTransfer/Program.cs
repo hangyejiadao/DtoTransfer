@@ -32,25 +32,28 @@ namespace DtoTransfer
                 Name = "aasdf",
                 Age = 4,
                 Money = 100
-               ,AString =""
+               ,AString ="asdfa"
             };
             var strA = new StuA()
             {
                 Age = 555555,
                 Name = "DDDDDDDDDDDDDD",
                 Money = 12,
-                BString = null
+                BString = "AAAAAAAAAA"
             };
 
             var time = 1000000;
             var start = DateTime.Now;
             for (int i = 0; i < time; i++)
             {
+                Console.WriteLine(st.Test);
                 var tem = CloneHelper<StuA, Stu>.Update(strA, st).ForMember(d => d.AString,strA, s => s.BString);
+                Console.WriteLine(tem.Test);
+                Console.WriteLine();
             }
             Console.WriteLine("表达式树:" + (DateTime.Now - start).Milliseconds);
 
-            var startB = DateTime.Now;
+            var startB = DateTime.Now;                                                               
             for (int i = 0; i < time; i++)
             {
                 var tem = AutoMapper.Mapper.Map<StuA, Stu>(strA, st);
@@ -76,6 +79,11 @@ namespace DtoTransfer
         public int Age { get; set; }
         public double Money { get; set; }
         public string AString { get; set; }
+
+        public string Test
+        {
+            get { return AString + "vsfvaffsdfasdfadsf"; }
+        }
     }
 
     public class StuA

@@ -181,13 +181,22 @@ namespace DtoTransfer
 
     public static class CloneHelperExtension
     {
+
         public static TDes ForMember<TSour, TDes, TMember>(this TDes des, Expression<Func<TDes, TMember>> deskey, TSour sour, Expression<Func<TSour, TMember>> sourcekey
          )
-        { 
+        {
             var me = sourcekey.Compile();
-            var demo = me(sour); 
-            var p = GetPropertyInfo(deskey); 
-            p.SetValue(des,demo); 
+            var demo = me(sour);
+
+
+         
+
+
+            var p = GetPropertyInfo(deskey);
+            p.SetValue(des,demo);
+            //CloneHelper<TDes, TDes>.Trans(des);
+
+
             return des;
         }
 
@@ -204,7 +213,7 @@ namespace DtoTransfer
                 return (body as MemberExpression).Member as PropertyInfo;
             }
             return null;
-        } 
+        }
     }
 
 
