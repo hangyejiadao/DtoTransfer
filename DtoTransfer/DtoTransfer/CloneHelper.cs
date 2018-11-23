@@ -110,7 +110,7 @@ namespace DtoTransfer
                 var value = item.GetValue(tin);
                 if (!item.PropertyType.IsGenericType)
                 {
-                    //Todo 如果当前类型是泛型类型，则为 true；否则为 false。
+                    //Todo 如果当前类型不是泛型类型，则为 true；否则为 false。
                     item.SetValue(tout, value == null ? null : Convert.ChangeType(value, item.PropertyType), null);
                 }
                 else
