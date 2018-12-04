@@ -118,12 +118,12 @@ namespace DtoTransfer
                     Type genericTypeDefinition = item.PropertyType.GetGenericTypeDefinition();
                     if (genericTypeDefinition == typeof(Nullable<>))
                     {
-                        //如果是值类型
+                        
                         item.SetValue(tout, value == null ? null : Convert.ChangeType(value, Nullable.GetUnderlyingType(item.PropertyType)));
                     }
                     else
                     {
-                        //不考虑非空泛型  比如说IList 这些
+                       
                     }
                 }
             }
